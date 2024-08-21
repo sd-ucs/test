@@ -1,0 +1,166 @@
+<?xml version ="1.0" encoding="utf-8" ?>
+<odoo>
+
+ <record id="action_confirm_appointments" model="ir.actions.server">
+    <field name="name">Confirm Appointment</field>
+    <field name="model_id" ref="model_hospital"/> <!-- Ensure this reference is correct -->
+    <field name="binding_model_id" ref="model_hospital"/> <!-- Ensure this reference is correct -->
+    <field name="binding_view_types">form,tree</field>
+    <field name="state">code</field>
+    <field name="code">
+        records.action_confirm()
+    </field>
+</record>
+
+<!--    &lt;!&ndash; Define the window action &ndash;&gt;-->
+<!--<record id="action_hospital_list" model="ir.actions.act_window">-->
+<!--    <field name="name">Hospitals</field>-->
+<!--    <field name="res_model">hospital.model_hospital</field>-->
+<!--    <field name="view_mode">tree,form</field>-->
+<!--    <field name="view_id" ref="view_hospital_tree"/>-->
+<!--    <field name="search_view_id" ref="view_hospital_search"/>-->
+<!--</record>-->
+
+<!--&lt;!&ndash; Define the menu items &ndash;&gt;-->
+<!--<menuitem id="menu_hospital_root" name="Hospitals"/>-->
+
+<!--<menuitem id="menu_hospital" name="Hospital Management" parent="menu_hospital_root"/>-->
+
+<!--<menuitem id="menu_hospital_list" name="Hospital List" parent="menu_hospital" action="action_hospital_list"/>-->
+
+
+
+
+
+
+
+    <record id="hospital_tree_view" model="ir.ui.view">
+        <field name="name">test.name.tree.view.inherit</field>
+        <field name="model">hospital</field>
+        <field name="arch" type="xml">
+            <tree string="Test Name" editable = "top">
+                <header>
+                    <button name ="button_done" string ="In Consultation" type ="object"/>
+                </header>
+
+<!--                <field name="product_id"/>-->
+<!--                <field name="product_qty"/>-->
+                <field name="name"/>
+                <field name="case_no"/>
+                <field name="date"/>
+                <field name="is_active"/>
+                <field name="hospital_ids"/>
+                <field name="description"/>
+                <field name="partner" widget="many2many_tags"/>
+                <field name="sale_order"/>
+                <field name="gender"/>
+                <field name="age"/>
+                <field name="address"/>
+                <field name="status"/>
+                <field name="date_of_birth"/>
+            </tree>
+        </field>
+    </record>
+    <record id="hospital_view_kanban" model="ir.ui.view">
+        <field name="name">hospital.kanban</field>
+        <field name="model">hospital</field>
+        <field name="arch" type="xml">
+            <kanban>
+                 <field name="name"/>
+                        <field name="case_no"/>
+                        <field name="date"/>
+                        <field name="hospital_ids"/>
+                        <field name="is_active"/>
+                        <field name="description"/>
+                        <field name="address"/>
+                        <field name="partner" widget="many2many_tags"/>
+                        <field name="sale_order"/>
+                        <field name="gender"/>
+                        <field name="age"/>
+                        <field name="status"/>
+                        <field name="date_of_birth"/>
+                <templates>
+                    <t t-name="kanban-box">
+                         <field name="image" widget="image" class = "oe_avatar"/>
+                        <div class="oe_kanban_global_click">
+                            <ul>
+                                <li>
+                                   name:  <field name="name"/>
+                                </li>
+                                <li>
+                                    case_no: <field name="case_no"/>
+                                </li>
+                                <li>
+                                    is_active: <field name="is_active"/>
+                                </li>
+                                <li>
+                                   description: <field name="description"/>
+                                </li>
+                                <li>
+                                   address: <field name="address"/>
+                                </li>
+                                <li>
+                                    partner: <field name="partner" widget="many2many_tags"/>
+                                </li>
+                                <li>
+                                     sale_order: <field name="sale_order"/>
+                                </li>
+                                <li>
+                                    gender: <field name="gender"/>
+                                </li>
+                                <li>
+                                    age: <field name="age"/>
+                                </li>
+                                <li>
+                                    date_of_birth: <field name="date_of_birth"/>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="hospital_form_view"  model="ir.ui.view">
+        <field name="name">hospital.form.view</field>
+        <field name="model">hospital</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="button_done" string="Done" class="oe_highlight" type="object"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+<!--                        <field name="product_id"/>-->
+<!--                        <field name="product_qty"/>-->
+                        <field name="case_no"/>
+                        <field name="date"/>
+                        <field name="is_active"/>
+                        <field name="description"/>
+                        <field name="hospital_ids"/>
+                        <field name="address"/>
+                        <field name="partner" widget="many2many_tags"/>
+                        <field name="sale_order"/>
+                        <field name="gender"/>
+                        <field name="status"/>
+                        <field name="age"/>
+                        <field name="date_of_birth"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ir_action_test" model="ir.actions.act_window">
+        <field name="name">Hospital ucs</field>
+        <field name="res_model">hospital</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+<!--    <menuitem id="menu_hospital_module"-->
+<!--              name="Hospital Clinic"-->
+<!--              action="ir_action_test"-->
+<!--              sequence="2"/>-->
+</odoo>
