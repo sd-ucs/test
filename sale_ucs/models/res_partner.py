@@ -6,3 +6,4 @@ class ResPartner(models.Model):
 
 
     case_no = fields.Char(string='Case No')
+#test
